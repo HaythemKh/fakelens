@@ -1,0 +1,100 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# PyTorch
+*.pth
+*.pt
+checkpoints/
+
+# ONNX models (if large)
+*.onnx
+
+# Machine Learning
+datasets/
+data/
+*.csv
+*.h5
+*.pkl
+*.joblib
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node modules (if using npm for extension)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+
+# Documentation (except ARCHITECTURE.md)
+docs/*
+!docs/ARCHITECTURE.md
+
+# Test files
+test_images/
+*.jpg
+*.png
+*.jpeg
+*.webp
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Backend
+*.db
+*.sqlite
+*.sqlite3
+
+# Extension builds
+extension.zip
+extension/dist/
+extension/build/
+
+# API keys and secrets
+secrets.json
+config.json
