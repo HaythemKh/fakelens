@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "FakeLens",
+  "version": "1.0.0",
+  "description": "Détecteur d'images générées par IA - AI-generated image detector",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost:8000/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content-script.js"],
+      "css": ["content/content-style.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["models/*.onnx", "libs/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
