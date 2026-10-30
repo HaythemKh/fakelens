@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head><title>Create Icons</title></head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+function createIcon(size) {
+  const canvas = document.getElementById('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  
+  // Gradient background
+  const gradient = ctx.createLinearGradient(0, 0, size, size);
+  gradient.addColorStop(0, '#667eea');
+  gradient.addColorStop(1, '#764ba2');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, size, size);
+  
+  // White circle
+  ctx.fillStyle = 'white';
+  ctx.beginPath();
+  ctx.arc(size/2, size/2, size/3, 0, Math.PI * 2);
+  ctx.fill();
+  
+  // Magnifying glass handle
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = size/8;
+  ctx.beginPath();
+  ctx.moveTo(size * 0.65, size * 0.65);
+  ctx.lineTo(size * 0.85, size * 0.85);
+  ctx.stroke();
+  
+  return canvas.toDataURL('image/png');
+}
+
+// Create icons
+[16, 32, 48, 128].forEach(size => {
+  const dataUrl = createIcon(size);
+  const link = document.createElement('a');
+  link.download = 'icon' + size + '.png';
+  link.href = dataUrl;
+  link.click();
+});
+</script>
+</body>
+</html>
