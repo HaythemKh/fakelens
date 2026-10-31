@@ -96,12 +96,22 @@ async function loadHistory() {
         uncertain: 'Incertain'
       };
       
+      // Generate thumbnail if imageData exists
+      const thumbnail = item.imageData ? 
+        `<img src="${item.imageData}" alt="Thumbnail" class="history-thumbnail" />` : 
+        '<div class="history-no-thumb">🖼️</div>';
+      
       return `
         <div class="history-item">
-          <div class="history-item-verdict ${item.verdict}">
-            ${verdictLabels[item.verdict]} (${(item.score * 100).toFixed(1)}%)
+          <div class="history-item-content">
+            ${thumbnail}
+            <div class="history-item-details">
+              <div class="history-item-verdict ${item.verdict}">
+                ${verdictLabels[item.verdict]} (${(item.score * 100).toFixed(1)}%)
+              </div>
+              <div class="history-item-time">${time}</div>
+            </div>
           </div>
-          <div class="history-item-time">${time}</div>
         </div>
       `;
     }).join('');

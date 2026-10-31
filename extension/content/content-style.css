@@ -60,6 +60,21 @@
   padding: 24px;
 }
 
+.fakelens-image-preview {
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #e0e0e0;
+  background: #f5f5f5;
+}
+
+.fakelens-analyzed-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  display: block;
+}
+
 .fakelens-verdict {
   display: flex;
   align-items: center;

@@ -33,6 +33,7 @@ async function handleImageAnalysis(imageUrl, pageUrl) {
       score: prediction.score,
       imageUrl,
       pageUrl,
+      imageData,  // Add image data for display
       hasGradCAM: false
     };
     
@@ -139,6 +140,10 @@ function showResultOverlay(result, imageData) {
       </div>
       
       <div class="fakelens-content">
+        <div class="fakelens-image-preview">
+          <img src="${imageData}" alt="Analyzed image" class="fakelens-analyzed-image" />
+        </div>
+        
         <div class="fakelens-verdict">
           <span class="fakelens-verdict-icon">${info.icon}</span>
           <span class="fakelens-verdict-text">${info.label}</span>
