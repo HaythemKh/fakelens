@@ -82,18 +82,49 @@ function loadImageAsDataURL(imageUrl) {
   });
 }
 
-// TODO: Replace with actual ONNX inference
+/**
+ * Perform inference by calling backend API
+ * Sends image to /predict endpoint and returns score
+ */
 async function performLocalInference(imageData) {
-  console.log('Performing local inference (mock for now)...');
+  console.log('Calling backend API for prediction...');
+  const startTime = performance.now();
   
-  // Simulate processing
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
-  // Mock prediction - will be replaced with ONNX Runtime Web
-  return {
-    score: Math.random(),
-    processingTime: 500
-  };
+  try {
+    // Convert data URL to blob
+    const blob = await (await fetch(imageData)).blob();
+    
+    // Create form data
+    const formData = new FormData();
+    formData.append('file', blob, 'image.jpg');
+    
+    // Call backend API
+    const response = await fetch('http://localhost:8000/predict', {
+      method: 'POST',
+      body: formData
+    });
+    
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status} ${response.statusText}`);
+    }
+    
+    const result = await response.json();
+    const processingTime = performance.now() - startTime;
+    
+    console.log(`Prediction received: score=${result.score.toFixed(3)}, verdict=${result.verdict}`);
+    
+    return {
+      score: result.score,
+      processingTime: Math.round(processingTime),
+      isMock: result.is_mock || false
+    };
+    
+  } catch (error) {
+    console.error('Backend API call failed:', error);
+    
+    // Show error to user
+    throw new Error(`Backend non disponible. Vérifiez que le serveur tourne sur http://localhost:8000\n\nErreur: ${error.message}`);
+  }
 }
 
 function determineVerdict(score, settings) {
