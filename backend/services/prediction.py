@@ -20,10 +20,13 @@ def predict_image(image: Image.Image):
     tensor = preprocess(image).unsqueeze(0).to(device)
 
     with torch.no_grad():
-        logit = model(tensor)
-        probability = torch.sigmoid(logit).item()
+        logits = model(tensor)
+        probabilities = torch.softmax(logits, dim=1)
+        predicted_class = torch.argmax(probabilities, dim=1).item()
+        probability = probabilities[0][predicted_class].item()
 
     return {
-        "score": round(probability * 100, 2),
-        "probability": probability
-    }
+    "predicted_class": predicted_class,
+    "score": round(probability * 100, 2),
+    "probability": probability
+}
