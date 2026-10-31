@@ -111,10 +111,10 @@ async function performLocalInference(imageData) {
     const result = await response.json();
     const processingTime = performance.now() - startTime;
     
-    console.log(`Prediction received: score=${result.score.toFixed(3)}, verdict=${result.verdict}`);
+    console.log(`Prediction received: probability=${result.probability.toFixed(3)}`);
     
     return {
-      score: result.score,
+      score: result.probability,  // Use probability (0-1), not score (0-100)
       processingTime: Math.round(processingTime),
       isMock: result.is_mock || false
     };
